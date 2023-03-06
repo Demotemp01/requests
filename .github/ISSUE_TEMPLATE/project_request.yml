@@ -1,0 +1,35 @@
+name: Pedido de Exemplos
+description: Pedido de Projetos para exemplos em clientes
+title: "[Project]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vamos iniciar o processo de criar um novo projeto
+  - type: input
+    id: usuario
+    attributes:
+      label: Solicitante
+      description: Qual o seu usuário aqui no GitHub?
+      placeholder: ex. harrypotter
+    validations:
+      required: true
+  - type: input
+    id: cliente
+    attributes:
+      label: Cliente
+      description: Qual o nome do Cliente para quem a demo será apresentada?
+      placeholder: ex. GFT
+    validations:
+      required: true
+  - type: dropdown
+    id: projeto
+    attributes:
+      label: Projeto
+      description: Qual template quer utilizar?
+      options:
+        - simple-dotnet-template
+    validations:
+      required: true
