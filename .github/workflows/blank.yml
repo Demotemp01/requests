@@ -60,16 +60,13 @@ jobs:
 
       - name: Adicionando Variaveis no Repositório
         run: |
-          rgnamedev="rg-poc-dev-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          rgnamehml="rg-poc-hml-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          rgnameprd="rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
 
           gh secret set email --body ${{ steps.dados.outputs.email }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
           gh secret set cliente --body ${{ steps.dados.outputs.cliente }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}" 
           gh secret set projeto --body ${{ steps.dados.outputs.projeto }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          gh secret set rgnamedev --body $rgnamedev --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          gh secret set rgnamehml --body $rgnamehml --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          gh secret set rgnameprd --body $rgnameprd --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
+          gh secret set rgnamedev --body rg-poc-dev-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
+          gh secret set rgnamehml --body rg-poc-hml-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
+          gh secret set rgnameprd --body rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
           gh secret set randomname --body ${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
 
         env:
