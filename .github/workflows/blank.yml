@@ -47,9 +47,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-     - name: Permissão ao repositório Criado
+      - name: Permissão ao repositório Criado
         run: |
           curl -X PUT -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/repos/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}/collaborators/${{ steps.participante.outputs.idparticipante }} -d '{"permission":"admin"}'
+      
       - name: Permissão a secret
         run: |
           repoid=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/repos/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }} | jq '.id')
