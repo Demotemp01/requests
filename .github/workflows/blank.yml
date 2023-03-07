@@ -43,7 +43,7 @@ jobs:
 
       - name: Criar repositório de Demo
         run: |
-          gh repo create "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}" --private --template "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}"
+          gh repo create "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}" --public --template "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
