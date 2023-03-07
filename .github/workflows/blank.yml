@@ -29,10 +29,10 @@ jobs:
           cliente=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .cliente.text)
           email=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .mail.text)
           
-          echo "::set-output name=solicitante::$solicitante"
-          echo "::set-output name=projeto::$projeto"
-          echo "::set-output name=cliente::$cliente"
-          echo "::set-output name=email::$email"
+          echo "solicitante=$solicitante" >> $GITHUB_OUTPUT
+          echo "projeto=$projeto" >> $GITHUB_OUTPUT
+          echo "cliente=$cliente" >> $GITHUB_OUTPUT
+          echo "email=$email" >> $GITHUB_OUTPUT
       
       # - name: Login Azure
       #   uses: azure/login@v1
