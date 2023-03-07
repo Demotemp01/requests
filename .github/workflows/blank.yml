@@ -24,10 +24,10 @@ jobs:
       - name: Tratamento de Dados
         id: dados
         run: |
-          solicitante=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text)
-          projeto=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .projeto.text)
-          cliente=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .cliente.text)
-          email=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .mail.text)
+          solicitante=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text | sed 's/"//g')
+          projeto=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .projeto.text | sed 's/"//g')
+          cliente=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .cliente.text | sed 's/"//g')
+          email=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .mail.text )
           
           echo "solicitante=$solicitante" >> $GITHUB_OUTPUT
           echo "projeto=$projeto" >> $GITHUB_OUTPUT
