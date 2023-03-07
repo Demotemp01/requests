@@ -39,19 +39,19 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
  
-      #  - name: Gerar ID Aleatorio
-      #    id: random
-      #    run: |
-      #      randname=$(echo $RANDOM | base64 | head -c 20;)
-      #      echo "name=$randname" >> $GITHUB_OUTPUT
+      - name: Gerar ID Aleatorio
+        id: random
+        run: |
+          randname=$(echo $RANDOM | base64 | head -c 20;)
+          echo "name=$randname" >> $GITHUB_OUTPUT
 
-      #  - name: Criar repositório de Demo
-      #    run: |
-      #      gh repo create "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}" --private --template "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}"
+      - name: Criar repositório de Demo
+        run: |
+          gh repo create "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}" --private --template "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}"
 
-      #  - name: Criar Resource Groups
-      #    run: |
-      #      rgnamedev="rg-poc-dev-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
-      #      rgnamehml="rg-poc-hml-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
-      #      rgnameprd="rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+      - name: Criar Resource Groups
+        run: |
+          rgnamedev="rg-poc-dev-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          rgnamehml="rg-poc-hml-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          rgnameprd="rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
 
