@@ -69,7 +69,7 @@ jobs:
           gh secret set projeto --body "${{ steps.dados.outputs.projeto }}" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
           gh secret set rgnamedev --body "$rgnamedev" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
           gh secret set rgnamehml --body "$rgnamehml" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
-          gh secret set email --body "$rgnameprd" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          gh secret set rgnameprd --body "$rgnameprd" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
           gh secret set randomname --body "${{ steps.random.outputs.randname }}" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
 
         env:
