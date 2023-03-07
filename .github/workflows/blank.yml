@@ -78,7 +78,7 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             @${{ steps.dados.outputs.solicitante }} Repositório Criado: https://github.com/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}
-            Esse repostório será excluido em 24h.
+            Esse repostório será excluido a meia noite de hoje.
 
       - name: Close Issue
         uses: peter-evans/close-issue@v2
