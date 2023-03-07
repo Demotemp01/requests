@@ -47,7 +47,7 @@ jobs:
 
        - name: Criar repositório de Demo
          run: |
-           gh repo create ${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }} --private --template ${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}
+           gh repo create "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}" --private --template "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}"
 
        - name: Criar Resource Groups
          run: |
