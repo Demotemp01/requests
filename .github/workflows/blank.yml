@@ -75,7 +75,9 @@ jobs:
           body: |
             @${{ steps.dados.outputs.projeto }} Repositório Criado: https://github.com//${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}
             Esse repostório será excluido em 24h.
-
+        env:
+          token: ${{ secrets.GH_TOKEN }}
+          
       - name: Close Issue
         uses: peter-evans/close-issue@v2
         with:
