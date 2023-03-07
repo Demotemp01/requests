@@ -42,8 +42,8 @@ jobs:
        - name: Gerar ID Aleatorio
          id: random
          run: |
-          randname=$(echo $RANDOM | base64 | head -c 20;)
-          echo "name=$randname" >> $GITHUB_OUTPUT
+           randname=$(echo $RANDOM | base64 | head -c 20;)
+           echo "name=$randname" >> $GITHUB_OUTPUT
 
       #  - name: Criar repositório de Demo
       #    run: |
