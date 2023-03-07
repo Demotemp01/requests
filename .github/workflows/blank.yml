@@ -51,16 +51,26 @@ jobs:
         run: |
           curl -X PUT -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/repos/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}/collaborators/${{ steps.participante.outputs.idparticipante }} -d '{"permission":"admin"}'
       
-      - name: Permissão a secret
+      - name: Permissão a secret de organização
         run: |
           repoid=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/repos/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }} | jq '.id')
           curl -X PUT -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/orgs/${{ github.repository_owner }}/actions/secrets/GH_TOKEN/repositories/$repoid
           curl -X PUT -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/orgs/${{ github.repository_owner }}/actions/secrets/AZURE_LOGIN/repositories/$repoid
 
 
-      - name: Criar Resource Groups
+      - name: Adicionando Variaveis no Repositório
         run: |
           rgnamedev="rg-poc-dev-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
           rgnamehml="rg-poc-hml-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
           rgnameprd="rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
 
+          gh secret set email --body "${{ steps.dados.outputs.email }}" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          gh secret set cliente --body "${{ steps.dados.outputs.cliente }}" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}" 
+          gh secret set projeto --body "${{ steps.dados.outputs.projeto }}" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          gh secret set rgnamedev --body "$rgnamedev" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          gh secret set rgnamehml --body "$rgnamehml" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          gh secret set email --body "$rgnameprd" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+          gh secret set randomname --body "${{ steps.random.outputs.randname }}" --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.randname }}"
+
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
