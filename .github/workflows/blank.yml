@@ -21,4 +21,11 @@ jobs:
         with:
           body: ${{ env.ISSUE_BODY }}
 
-      - run: echo ${{ toJSON(steps.parse.outputs.data) }}
+      - run: |
+          repo=(cat ${{ toJSON(steps.parse.outputs.data) }} | jq .projeto.text)
+          solicitante=(cat ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text)
+          cliente=(cat ${{ toJSON(steps.parse.outputs.data) }} | jq .cliente.text)
+          
+          echo "$repo - $solicitante - $cliente"
+          
+ 
