@@ -22,7 +22,7 @@ jobs:
           body: ${{ env.ISSUE_BODY }}
 
       - run: |
-          number='echo $(jq -r '.number' <<< "number=`echo $(jq -r '.number' <<< "$githubjson")`")'
+          number='echo $(jq -r '.projeto.text' <<< "${{ toJSON(steps.parse.outputs.data) }}")'
           repo=(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .projeto.text)
           solicitante=(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text)
           cliente=(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .cliente.text)
