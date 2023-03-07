@@ -68,14 +68,16 @@ jobs:
           curl -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}/actions/variables -d '{"name":"rgnameprd","value":"rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"}'
           curl -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}/actions/variables -d '{"name":"randomname","value":"${{ steps.random.outputs.name }}"}'
 
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            @${{ steps.dados.outputs.projeto }} Repositório Criado: https://github.com//${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}
+            Esse repostório será excluido em 24h.
 
-          # gh secret set email --body ${{ steps.dados.outputs.email }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          # gh secret set cliente --body ${{ steps.dados.outputs.cliente }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}" 
-          # gh secret set projeto --body ${{ steps.dados.outputs.projeto }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          # gh secret set rgnamedev --body rg-poc-dev-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          # gh secret set rgnamehml --body rg-poc-hml-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          # gh secret set rgnameprd --body rg-poc-prd-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-          # gh secret set randomname --body ${{ steps.random.outputs.name }} --repo "${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}"
-
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Close Issue
+        uses: peter-evans/close-issue@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          
