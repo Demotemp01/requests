@@ -21,9 +21,21 @@ jobs:
         with:
           body: ${{ env.ISSUE_BODY }}
 
-      - run: |
+      - name: Tratamento de Dados
+        id: dados
+        run: |
           solicitante=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text)
+          projeto=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .projeto.text)
+          cliente=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .cliente.text)
+          email=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .E-mail.text)
           
-          echo "$solicitante"
-          
+          echo "::set-output name=solicitante::$solicitante"
+          echo "::set-output name=projeto::$projeto"
+          echo "::set-output name=cliente::$cliente"
+          echo "::set-output name=email::$email"
+      
+      # - name: Login Azure
+      #   uses: azure/login@v1
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
  
