@@ -17,6 +17,14 @@ body:
     validations:
       required: true
   - type: input
+    id: email
+    attributes:
+      label: E-mail
+      description: Qual seu e-mail corporativo?
+      placeholder: ex. harry.potter@hogwarts.com.uk
+    validations:
+      required: true
+  - type: input
     id: cliente
     attributes:
       label: Cliente
