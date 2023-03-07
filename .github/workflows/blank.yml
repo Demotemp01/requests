@@ -7,6 +7,10 @@ on:
   issues:
     types: [opened]
 
+permissions:
+  issues: write
+
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
@@ -75,13 +79,10 @@ jobs:
           body: |
             @${{ steps.dados.outputs.projeto }} Repositório Criado: https://github.com//${{ github.repository_owner }}/${{ steps.dados.outputs.projeto }}-${{ steps.dados.outputs.cliente }}-${{ steps.random.outputs.name }}
             Esse repostório será excluido em 24h.
-        env:
-          token: ${{ secrets.GH_TOKEN }}
-          
+
       - name: Close Issue
         uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ github.event.issue.number }}
-        env:
-          token: ${{ secrets.GH_TOKEN }}
+
           
