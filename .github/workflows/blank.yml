@@ -22,8 +22,8 @@ jobs:
           body: ${{ env.ISSUE_BODY }}
 
       - run: |
-          echo "number=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text)"
+          solicitante=$(echo ${{ toJSON(steps.parse.outputs.data) }} | jq .solicitante.text)
           
-          echo "$number"
+          echo "$solicitante"
           
  
